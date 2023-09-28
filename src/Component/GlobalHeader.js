@@ -3,11 +3,12 @@ import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import Feather from 'react-native-vector-icons/Feather'
+import { heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
     container:{
-        flex:0.1,
-        backgroundColor:'#047BD5'
+        height:hp(10),
+        backgroundColor:'#FFDF00'
     },
     content:{
         flex:1,
@@ -22,21 +23,26 @@ const styles = StyleSheet.create({
         fontSize:RFPercentage(3)
     },
     titleContainer:{
-        flex:0.6,
+        flex:0.65,
         justifyContent:'center'
     },
+    titleWithoutbackNav:{
+        flex:1,
+        justifyContent:'center',
+        marginLeft:'5%'
+    },
     IconContainerR:{
-        flex:0.25,
+        flex:0.20,
+        justifyContent:'center',
+        alignItems:'center'
     },
     title:{
-        color:'#fff',
+        color:'#000',
         fontSize:RFPercentage(3)
     }
 })
 
-const GlobalHeader = ({title,backNav}) => {
-
-    const [container2, setContainer2] = useState(false)
+const GlobalHeader = ({title,backNav,rightComp}) => {
 
     const Navigation = useNavigation();
 
@@ -48,16 +54,16 @@ const GlobalHeader = ({title,backNav}) => {
             <View style={styles.content}>
                 { backNav && 
                     <TouchableOpacity style={styles.IconContainerL} onPress={backNavi}>
-                        <Feather name="arrow-left" size={26} color="#fff" style={styles.Icon}/>
+                        <Feather name="arrow-left" size={30} color="#000" style={styles.Icon}/>
                     </TouchableOpacity>
                 }   
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{title}</Text>
+                <View style={!backNav ? styles.titleWithoutbackNav : styles.titleContainer}>
+                        <Text style={[styles.title]}>{title}</Text>
                 </View>
-                { container2 && 
-                    <View style={styles.IconContainerR}>
-                        <Text style={styles.title}>{title}</Text>
-                    </View>
+                { rightComp && 
+                    <TouchableOpacity style={styles.IconContainerR} onPress={rightComp}>
+                        <Feather name="shopping-cart" size={30} color="#000" style={styles.Icon}/>
+                    </TouchableOpacity>
                 }
             </View>
         </View>

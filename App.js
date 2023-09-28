@@ -2,9 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react';
 import { SafeAreaProvider} from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './src/Screens/LoginScreen';
-import Registration from './src/Screens/Registration';
+import MainNavigation from '../Ecommerce/src/Navigator/MainNavigation'
 
 const styles = StyleSheet.create({
   container:{ 
@@ -12,15 +10,11 @@ const styles = StyleSheet.create({
   }
 })
 const App = () => {
-  const Stack = createNativeStackNavigator();
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='Login'>
-            <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
-            <Stack.Screen name='Register' component={Registration} />
-          </Stack.Navigator>
+          <MainNavigation/>
         </NavigationContainer>
       </View>
     </SafeAreaProvider>
