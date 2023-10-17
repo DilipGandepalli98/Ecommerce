@@ -18,10 +18,8 @@ const styles = StyleSheet.create({
       }
 })
 
-const DropdownPractice = ({title,navigation,rating,starRating,setStarRating}) => {
+const DropdownPractice = ({title,navigation}) => {
 
-  console.log(starRating,'starRating')
-  console.log(setStarRating)
   return (
     <TouchableOpacity onPress={navigation} activeOpacity={0.5} style={styles.headingContainer}>
         <Text style={styles.heading}>{title}</Text>

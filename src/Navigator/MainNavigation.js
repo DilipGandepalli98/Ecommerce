@@ -7,7 +7,8 @@ import Notification from "../Screens/Notification";
 import BottomTabNavigator from "./BottomTabNavigator";
 import SearchScreen from "../Screens/SearchScreen";
 import Calculator from "../Screens/practice/Calculator";
-import StarRating from "../Screens/practice/StarRating"
+import StarRating from "../Screens/practice/StarRating";
+import ToDo from "../Screens/practice/ToDo";
 
 function MainNavigation() {
 
@@ -22,6 +23,7 @@ function MainNavigation() {
             <Stack.Screen name='SearchScreen' component={SearchScreen} options={{headerShown:false}} />
             <Stack.Screen name='Calculator' component={Calculator} options={{headerShown:false}} />
             <Stack.Screen name='StarRating' component={StarRating} options={{headerShown:false}} />
+            <Stack.Screen name='ToDoList' component={ToDo} options={{headerShown:false}} />
         </Stack.Navigator>
     )
 } 

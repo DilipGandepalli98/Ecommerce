@@ -3,6 +3,8 @@ import React from 'react';
 import { SafeAreaProvider} from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import MainNavigation from '../Ecommerce/src/Navigator/MainNavigation'
+import { store } from './src/Service/Store'
+import {Provider } from 'react-redux'
 
 const styles = StyleSheet.create({
   container:{ 
@@ -10,13 +12,16 @@ const styles = StyleSheet.create({
   }
 })
 const App = () => {
+
   return (
     <SafeAreaProvider>
+      <Provider store={store}>
       <View style={styles.container}>
         <NavigationContainer>
           <MainNavigation/>
         </NavigationContainer>
       </View>
+      </Provider>
     </SafeAreaProvider>
   )
 }

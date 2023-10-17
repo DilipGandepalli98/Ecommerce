@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,ScrollView } from 'react-native';
+import React,{useState} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Feather from 'react-native-vector-icons/Feather'
@@ -54,26 +54,49 @@ const styles = StyleSheet.create({
     },
 })
 
-const SearchScreen = () => {
+const SearchScreen = ({route}) => {
+    const data = route.params.data
     const navigation = useNavigation();
+    const [searchData,setSearchData ] = useState(data)
+    const [searchView,setSearchView] = useState(false)
 
     const backNav = () => {
         navigation.goBack()
     }
+    const handleOnChange = (text) => {
+        setSearchView(true)
+        const filterData = data.filter((item)=>{
+                return item.title.toLowerCase().includes(text.toLowerCase())
+        })
+        setSearchData(filterData)
+    }
+
   return (
+    <View>
     <View style={styles.container}>
         <View style={styles.inputContainer}>
             <TouchableOpacity style={styles.searchIcon} onPress={backNav}>
                 <Feather name="arrow-left" size={30} color="#000" style={styles.Icon}/> 
             </TouchableOpacity>
             <View style={styles.inputBox}>
-                <TextInput autoFocus selectionColor={"#FFDF00"} style={styles.input} placeholder='Search Products'/>
+                <TextInput onChangeText={(text)=>(handleOnChange(text))} autoFocus selectionColor={"#FFDF00"} style={styles.input} placeholder='Search Products'/>
             </View>
             <View style={styles.inputRight}>
                 <FontAwesome color="#454545" name="camera" size={20} style={styles.rightIcons1} />
                 <FontAwesome color="#454545" name="microphone" size={20} style={styles.rightIcons2} />
-            </View>
+            </View> 
         </View>
+    </View>
+    {
+        searchView && 
+        searchData.map((item)=>{
+            return (
+                <ScrollView>
+                    <Text>{item.title}</Text>
+                </ScrollView>
+            )
+        })
+    }
     </View>
   )
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -49,11 +49,12 @@ const styles = StyleSheet.create({
     
 })
 
-const SearchProduct = () => {
-
+const SearchProduct = ({data}) => {
     const navigation =  useNavigation();
     const search = () =>{
-        navigation.navigate('SearchScreen')
+        navigation.navigate('SearchScreen',{
+            data:data
+        })
     }
 
     return (

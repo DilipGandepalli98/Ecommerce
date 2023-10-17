@@ -1,0 +1,30 @@
+What is JavaScript?
+        --> JavaScript is a scripting language for creating dynamic web page content.
+        --> JavaScript is a lightweight, cross-platform, single-threaded, and interpreted compiled programming language.
+        --> JavaScript can be used for Client-side developments as well as Server-side developments.
+
+What is async and await in JavaScript?
+        --> "async and await make promises easier to write" async makes a function return a Promise. await makes a function wait for a Promise.
+        -->  Async/Await makes it easier to write promises. The keyword 'async' before a function makes the function return a promise, always. And the keyword await is used inside async functions, which makes the program wait until the Promise resolves
+
+What is promise in JavaScript?
+        --> A Promise is an object representing the eventual completion or failure of an asynchronous operation.
+        --> The Promise object supports two properties: state and result. While a Promise object is "pending" (working), the result is undefined. When a Promise object is "fulfilled", the result is a value. When a Promise object is "rejected", the result is an error object.
+
+What is lexical scope in Js? 
+        The lexical scope allows a function scope to access statically the variables from the outer scopes
+
+WHat is Closure in JavaScript?
+        A closure is a feature of JavaScript that allows inner functions to access the outer scope of a function. Closure helps in binding a function to its outer boundary and is created automatically whenever a function is created.
+
+What is hoisting in js?
+        Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their respective scopes before the code is executed
+
+Are let and const hoisted or not in JavaScript?
+        --> All declarations (function, var, let, const and class) are hoisted in JavaScript, while the var declarations are initialized with undefined , but let and const declarations remain uninitialized. --> They will only get initialized when their lexical binding (assignment) is evaluated during runtime by the JavaScript engine.
+
+let,const,var
+        The keyword "let" enables the users to define variables and on the other hand, "const" enables the users to define constants. Variables were previously declared using "var" which had function scope and were hoisted to the top. It means that a variable can be used before declaration. But, the "let" variables and constants have block scope which is surrounded by curly-braces "{}" and cannot be used before declaration.
+
+Arrow function?
+        Arrow function {()=>} is concise way of writing Javascript functions in shorter way. Arrow functions were introduced in the ES6 version. They make our code more structured and readable. Arrow functions are anonymous functions i.e. functions without a name and are not bound by an identifier

@@ -12,19 +12,19 @@ const styles = StyleSheet.create({
 const Practice = () => {
 
   const navigation = useNavigation();
-  const [starRating,setStarRating] = useState(false)
 
   const CalculatorNavigate = () => {
     navigation.navigate("Calculator")
   }
-  const rating = () => {
-    setStarRating(true)
+  const starRatingNavigate = () => {
+    navigation.navigate("StarRating")
   }
   return (
     <View style={styles.container}>
       <GlobalHeader title="Practice" backNav/>
       <DropdownPractice title="Calculator" navigation={CalculatorNavigate}/>
-      <DropdownPractice title="Star-Rating" rating={rating} starRating={starRating} setStarRating={setStarRating} />
+      <DropdownPractice title="Star-Rating"  navigation={starRatingNavigate} />
+      <DropdownPractice title="To-do-list"  navigation={()=>navigation.navigate('ToDoList')} />
     </View>
   )
 }
