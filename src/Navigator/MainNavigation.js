@@ -9,21 +9,28 @@ import SearchScreen from "../Screens/SearchScreen";
 import Calculator from "../Screens/practice/Calculator";
 import StarRating from "../Screens/practice/StarRating";
 import ToDo from "../Screens/practice/ToDo";
+import ProductList from "../Screens/ProductList";
+import Hooks from "../Screens/practice/Hooks";
+import StoreInput from "../Screens/practice/StoreInput";
 
 function MainNavigation() {
 
     const Stack = createNativeStackNavigator();
     return (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="StoreInput">
+            
+            {/* <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/> */}
+            {/* <Stack.Screen name='Register' component={Registration} options={{headerShown:false}} /> */}
             <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{headerShown:false}}/>
-            <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }}/>
-            <Stack.Screen name='Register' component={Registration} options={{headerShown:false}} />
+            <Stack.Screen name='StoreInput' component={StoreInput} options={{headerShown:false}}/>
             <Stack.Screen name='Notification' component={Notification} options={{headerShown:false}} />
             <Stack.Screen name='CartScreen' component={CartScreen} options={{headerShown:false}} />
             <Stack.Screen name='SearchScreen' component={SearchScreen} options={{headerShown:false}} />
             <Stack.Screen name='Calculator' component={Calculator} options={{headerShown:false}} />
             <Stack.Screen name='StarRating' component={StarRating} options={{headerShown:false}} />
             <Stack.Screen name='ToDoList' component={ToDo} options={{headerShown:false}} />
+            <Stack.Screen name='ProductList' component={ProductList} options={{headerShown:false}} />
+            <Stack.Screen name='Hooks' component={Hooks} options={{headerShown:false}}/>
         </Stack.Navigator>
     )
 } 

@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 const SearchScreen = ({route}) => {
     const data = route.params.data
     const navigation = useNavigation();
+    const [searchRes,setSearchRes] = useState('')
     const [searchData,setSearchData ] = useState(data)
     const [searchView,setSearchView] = useState(false)
 
@@ -64,36 +65,57 @@ const SearchScreen = ({route}) => {
         navigation.goBack()
     }
     const handleOnChange = (text) => {
-        setSearchView(true)
-        const filterData = data.filter((item)=>{
-                return item.title.toLowerCase().includes(text.toLowerCase())
+        setSearchRes(text)
+        const filterData = data.products.filter((item)=>{
+                return item.title.toLowerCase().includes(searchRes.toLowerCase())
         })
         setSearchData(filterData)
+        if(text.length >= 2){
+            setSearchView(true)
+        }else{
+            setSearchView(false)
+        }
     }
 
+    const handlesuggestion = (text) => {
+        const search = [...searchData]
+        const result = search.filter((item)=>{
+            return (
+                item.title.toLowerCase().includes(text.toLowerCase())
+            )
+        })
+        setSearchRes(text)
+        setSearchData(result)
+    }
   return (
-    <View>
+    <View style={{backgroundColor:'white'}}>
     <View style={styles.container}>
         <View style={styles.inputContainer}>
             <TouchableOpacity style={styles.searchIcon} onPress={backNav}>
                 <Feather name="arrow-left" size={30} color="#000" style={styles.Icon}/> 
             </TouchableOpacity>
             <View style={styles.inputBox}>
-                <TextInput onChangeText={(text)=>(handleOnChange(text))} autoFocus selectionColor={"#FFDF00"} style={styles.input} placeholder='Search Products'/>
+                <TextInput value={searchRes} onChangeText={(text)=>(handleOnChange(text))} autoFocus selectionColor={"#FFDF00"} style={styles.input} placeholder='Search Products'/>
             </View>
             <View style={styles.inputRight}>
                 <FontAwesome color="#454545" name="camera" size={20} style={styles.rightIcons1} />
-                <FontAwesome color="#454545" name="microphone" size={20} style={styles.rightIcons2} />
+                <FontAwesome onPress={()=>setSearchRes('')} color="#454545" name="close" size={20} style={styles.rightIcons2} />
             </View> 
         </View>
     </View>
     {
         searchView && 
-        searchData.map((item)=>{
+        searchData?.map((item,index)=>{
             return (
-                <ScrollView>
-                    <Text>{item.title}</Text>
-                </ScrollView>
+                <View style={{flexDirection:'row'}}>
+                    <TouchableOpacity style={{flex:0.85,flexDirection:'row',marginHorizontal:'4%',backgroundColor:'white',marginVertical:'1%',paddingVertical:'2%'}} key={index}>
+                        <Feather style={{marginRight:'5%'}} color={'grey'} size={18} name='search'/>
+                        <Text style={{color:'black'}}>{item?.title}</Text> 
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>handlesuggestion(item.title)} style={{flex:0.15,justifyContent:'center',alignItems:'center'}}>
+                        <Feather color={'grey'} size={22} name='arrow-up-left' />
+                    </TouchableOpacity>
+                </View>
             )
         })
     }

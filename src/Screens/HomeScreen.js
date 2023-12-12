@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { View,Text,StyleSheet, StatusBar, Button, FlatList } from 'react-native';
+import { View,Text,StyleSheet, StatusBar, Button, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import HomeHeader from '../Component/HomeHeader';
 import SearchProduct from '../Component/SearchProduct';
 import { useDispatch } from 'react-redux';
 import { detailsAction } from '../Service/Actions';
-import axios from 'axios';
+import { useNavigation} from '@react-navigation/native'
+import { useSelector } from 'react-redux'
 
 const styles = StyleSheet.create({
     container:{
@@ -12,35 +13,15 @@ const styles = StyleSheet.create({
     },
 })
 
-function HomeScreen () {
 
-    const [datas, setDatas] = useState([])
+function HomeScreen () {
     const dispatch = useDispatch();
+    const inputObjectData = useSelector((state)=>state.practice.formDetails)
 
     useEffect(()=>{
         dispatch(detailsAction('Sneha'))
     },[])
 
-    useEffect(()=>{
-        axios({
-            method:'GET',
-            url:'https://dummyjson.com/products',
-            headers:{
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            }
-        }).then((response)=>{
-            setDatas(response.data.products)
-        })
-    },[])
-
-    const renderItem = (item,index) => {
-        return (
-        <View style={{flex:1,marginHorizontal:'4%',marginVertical:'2%'}}>
-            <Text>{item.item.title}</Text>
-        </View>
-        )
-    }
     return (
         <>
         <StatusBar
@@ -49,14 +30,21 @@ function HomeScreen () {
             animated={true}
         />
             <HomeHeader/>
-            <SearchProduct data={datas}/>
-            <View style = {{flex:1}}>
-            <FlatList
-                data={datas}
-                keyExtractor={(item,index)=>index.toString()}
-                renderItem={renderItem}
-            />
-            </View>
+            <SearchProduct/>
+            { 
+                    inputObjectData.map((item,index)=>{
+                        return(
+                            <View key={index.toString()}>
+                                <View style={{backgroundColor:'grey',marginBottom:'1%'}}>
+                                    <Text>{`Name : ${item.name}`}</Text>
+                                    <Text>{`Age : ${item.age}`}</Text>
+                                    <Text>{`City : ${item.city}`}</Text>
+                                    <Text>{`State : ${item.stateValue}`}</Text>
+                                </View>
+                            </View>
+                        )
+                    })
+                }
         </>
     )
 }

@@ -25,6 +25,7 @@ const Practice = () => {
       <DropdownPractice title="Calculator" navigation={CalculatorNavigate}/>
       <DropdownPractice title="Star-Rating"  navigation={starRatingNavigate} />
       <DropdownPractice title="To-do-list"  navigation={()=>navigation.navigate('ToDoList')} />
+      <DropdownPractice title="Hooks"  navigation={()=>navigation.navigate('Hooks')} />
     </View>
   )
 }

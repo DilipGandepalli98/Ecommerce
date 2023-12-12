@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, Pressable, StyleSheet } from 'react-native';
+import React,{useState} from 'react';
+import {View, Text, Pressable, StyleSheet,Button } from 'react-native';
 import { RFPercentage } from 'react-native-responsive-fontsize'
 
 const styles = StyleSheet.create({
@@ -21,14 +21,31 @@ const styles = StyleSheet.create({
 })
 
 const LoginScreen = ({navigation}) => {
+
+    const [state,setState]=useState({count:10,theme:'blue'})
+    const count = state.count
+    const theme = state.theme
+
+    const decrement = ()=>{
+        setState((prevState) => ({...prevState,count:prevState.count-1}))
+        
+    }
+    console.log(count)
+    const increment = ()=>{
+        console.log('ii')
+    }
+
+    const initialValue = (function () {
+        return 'hello'
+      })();
+
     return (
         <View style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>Login screen</Text>
-            </View>
-            <Pressable onPress={()=>navigation.navigate("Register")}>
-                <Text>Register</Text>
-            </Pressable>
+            <Button onPress={decrement} title='-'/>
+            <Text style={{textAlign:'center',fontSize:22}}>{count}</Text>
+            <Text style={{textAlign:'center',fontSize:22}}>{theme}</Text>
+            <Button onPress={increment} title='+'/>
+            <Text>{initialValue}</Text>
         </View>
     )
 }

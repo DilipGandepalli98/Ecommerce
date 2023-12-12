@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
 })
 
 const SearchProduct = ({data}) => {
+
     const navigation =  useNavigation();
     const search = () =>{
         navigation.navigate('SearchScreen',{

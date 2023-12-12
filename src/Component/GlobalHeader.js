@@ -3,6 +3,7 @@ import {View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import Feather from 'react-native-vector-icons/Feather'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import { heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
@@ -42,12 +43,15 @@ const styles = StyleSheet.create({
     }
 })
 
-const GlobalHeader = ({title,backNav,rightComp}) => {
+const GlobalHeader = ({title,backNav,rightComp,heart}) => {
 
     const Navigation = useNavigation();
 
     const backNavi = () =>{
-        Navigation.goBack()
+        Navigation.goBack(1)
+    }
+    const wishList = () =>{
+        Navigation.navigate('WishList')
     }
     return (
         <View style={styles.container}>
@@ -63,6 +67,12 @@ const GlobalHeader = ({title,backNav,rightComp}) => {
                 { rightComp && 
                     <TouchableOpacity style={styles.IconContainerR} onPress={rightComp}>
                         <Feather name="shopping-cart" size={30} color="#000" style={styles.Icon}/>
+                    </TouchableOpacity>
+                }
+                {
+                    heart && 
+                    <TouchableOpacity style={styles.IconContainerR} onPress={wishList}>
+                        <AntDesign size={26} name='hearto' color='black'/>
                     </TouchableOpacity>
                 }
             </View>
